@@ -1,23 +1,75 @@
 {
-  "dependencies": {
-    "@prisma/client": "5.12.1",
-    "express": "^4.19.2",
-    "prisma": "^5.12.1"
-  },
-  "name": "backend",
-  "version": "1.0.0",
-  "main": "index.js",
-  "devDependencies": {
-    "@types/cors": "^2.8.17",
-    "@types/dotenv": "^8.2.0",
-    "@types/express": "^4.17.21",
-    "typescript": "^5.4.4"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": ""
+	"devDependencies": {
+		"@faker-js/faker": "^8.2.0",
+		"@trivago/prettier-plugin-sort-imports": "^4.2.0",
+		"@types/express": "^4.17.18",
+		"@types/module-alias": "^2.0.2",
+		"@types/node": "^20.8.3",
+		"@types/swagger-jsdoc": "^6.0.1",
+		"@typescript-eslint/eslint-plugin": "^6.7.5",
+		"eslint": "^8.55.0",
+		"eslint-config-prettier": "^9.1.0",
+		"nodemon": "^3.0.1",
+		"prettier": "^3.1.0",
+		"prisma": "^5.4.1",
+		"ts-node": "^10.9.1",
+		"tsc-alias": "^1.8.8",
+		"tsconfig-paths": "^4.2.0",
+		"typescript": "^5.2.2"
+	},
+	"name": "practicum",
+	"version": "1.0.0",
+	"description": "practicum-crm",
+	"main": "index.js",
+	"scripts": {
+		"start": "node -r module-alias/register ./out/server.js",
+		"start:d": "yarn nodemon -r module-alias/register ./out/server.js",
+		"build": "yarn tsc && yarn tsc-alias",
+		"dev": "nodemon --require tsconfig-paths/register src/server.ts",
+		"test": "echo \"No test available\"",
+		"format:check": "yarn prettier -c .",
+		"format:fix": "yarn prettier -w .",
+		"lint": "yarn eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+		"prepare": "husky install",
+		"seed": "yarn prisma db push --force-reset && yarn prisma db seed"
+	},
+	"prisma": {
+		"seed": "ts-node prisma/seed.ts"
+	},
+	"keywords": [],
+	"_moduleAliases": {
+		"@modules": "out/src/modules",
+		"@controller": "out/controller",
+		"@middleware": "out/middleware",
+		"@model": "out/model",
+		"@api": "out/api",
+		"@service": "out/services",
+		"@configs": "out/configs"
+	},
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"@prisma/client": "^5.4.1",
+		"@types/bcrypt": "^5.0.0",
+		"@types/cors": "^2.8.14",
+		"@types/jsonwebtoken": "^9.0.3",
+		"@types/swagger-ui-express": "^4.1.4",
+		"@typescript-eslint/parser": "^6.7.5",
+		"bcrypt": "^5.1.1",
+		"cors": "^2.8.5",
+		"dayjs": "^1.11.10",
+		"dotenv": "^16.3.1",
+		"eslint-plugin-prettier": "^5.0.1",
+		"express": "^4.18.2",
+		"express-joi-validation": "^5.0.1",
+		"husky": "^8.0.3",
+		"joi": "^17.11.0",
+		"jsonwebtoken": "^9.0.2",
+		"jwt-redis": "^7.0.3",
+		"module-alias": "^2.2.3",
+		"redis": "^4.6.10",
+		"swagger-jsdoc": "^6.2.8",
+		"swagger-ui-express": "^5.0.0",
+		"winston": "^3.11.0"
+	}
 }

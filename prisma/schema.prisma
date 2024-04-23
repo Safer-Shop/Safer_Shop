@@ -14,7 +14,7 @@ datasource db {
 }
 
 model User {
-  id       Int        @id @default(autoincrement())
+  id       Int      @id @default(autoincrement())
   name     String
   surname  String
   phone    String[]
@@ -24,7 +24,7 @@ model User {
   // comment  Comment[]
   // favorite Favorite[]
   // order    Order[]
-  // role     role       @default(none)
+  role     role       @default(none)
   // basket   Basket?
 }
 
@@ -33,4 +33,12 @@ model Verification {
   code      String
   email     String
   createdAt DateTime @default(now())
+}
+
+
+enum role {
+  supervisor
+  admin
+  user
+  none
 }
