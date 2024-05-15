@@ -29,6 +29,8 @@ app.get("/", (req, res) => {
   res.redirect("/docs");
 });
 
+app.use("/api/v1", v1);
+
 // app.listen(port, () => {
 //   console.log(`Server is running. Host: http://localhost:${port}`);
 //   swaggerDocs(app, +port);
