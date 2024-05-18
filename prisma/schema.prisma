@@ -17,13 +17,15 @@ model User {
   id       Int        @id @default(autoincrement())
   name     String
   surname  String
-  username String
+  username String?     @unique
   phone    String
   email    String     @unique
   address  String?
   password String
   role     role       @default(none)
   status   UserStatus @default(active)
+  created  DateTime   @default(now())
+  updated  DateTime   @updatedAt()
 
   // comment  Comment[]
   // favorite Favorite[]

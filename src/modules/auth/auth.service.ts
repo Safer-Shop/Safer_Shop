@@ -4,7 +4,7 @@ import { Verification } from "./auth.dto";
 
 const prisma = new PrismaClient();
 
-export default class VerificationService {
+export default class AuthService {
   static async createVerification(code: string, email: string) {
     const id = uuid();
 

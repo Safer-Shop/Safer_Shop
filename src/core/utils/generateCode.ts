@@ -1,5 +1,5 @@
 export const differenceBetweenDates = (start: Date, end: Date) => {
-  return end.getTime() - start.getTime();
+  return (end.getTime() - start.getTime());
 };
 
 export const getTimeOut = (time: Date, timeOutSeconds: number) => {

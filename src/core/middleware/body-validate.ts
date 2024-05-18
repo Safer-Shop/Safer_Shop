@@ -4,6 +4,7 @@ import Joi from "joi";
 export const bodyValidate = (joiScheme: Joi.Schema): RequestHandler => {
   return async (req, res, next) => {
     const body = req.body;
+
     const { error } = joiScheme.validate(body, {
       abortEarly: false,
     });
@@ -16,6 +17,8 @@ export const bodyValidate = (joiScheme: Joi.Schema): RequestHandler => {
           path: q.path,
         })),
       });
+    } else {
+      next();
     }
   };
 };

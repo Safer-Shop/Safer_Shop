@@ -1,8 +1,9 @@
 import { User, role, UserStatus as status } from "@prisma/client";
+import { string } from "joi";
 
 export interface LoginDto {
-  username?: string;
-  email?: string;
+  // username: string;
+  email: string;
   password: string;
 }
 
@@ -10,12 +11,14 @@ export interface Payload {
   id: number;
   name: string;
   surname: string;
-  username: string;
+  username: string | null;
   phone: string;
   email: string;
   address: string;
   role: role;
   status: status;
+  created: Date | string;
+  updated: Date | string;
 }
 
 export const UserDto = (user: User): Omit<User, "password"> => {
@@ -29,6 +32,8 @@ export const UserDto = (user: User): Omit<User, "password"> => {
     address: user.address,
     role: user.role,
     status: user.status,
+    created: user.created,
+    updated: user.updated,
   };
 };
 
@@ -41,8 +46,11 @@ export class Verification {
   ) {}
 }
 
-
 export interface VerificationDto {
-  verificationId: string
-  code: string
+  code: string;
+  verificationId: string;
+}
+
+export interface resendDto {
+  email: string;
 }
