@@ -11,7 +11,7 @@
 			"@/*": ["./src/*"],
 			"@modules": ["./src/modules"],
 			"@core": ["./src/core"],
-			"@configs": ["./src/configs"],
+			"@config": ["./src/config"],
 			"@api": ["./src/api"]
 		},
 		"sourceMap": true,

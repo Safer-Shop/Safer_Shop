@@ -46,7 +46,7 @@
 		"@model": "out/model",
 		"@api": "out/api",
 		"@service": "out/services",
-		"@configs": "out/configs"
+		"@config": "out/config"
 	},
 	"author": "",
 	"license": "ISC",

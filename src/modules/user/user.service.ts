@@ -4,9 +4,7 @@ import bcrypt from "bcrypt";
 
 const prisma = new PrismaClient();
 
-type Field = 'email' | 'username';
-
-export default class AuthService {
+export default class UserService {
   static async create(detail: Userbody) {
     const hashPassword = bcrypt.hashSync(
       detail.password,
@@ -54,31 +52,24 @@ export default class AuthService {
     return info;
   }
 
-  static async findUser(identifier?: string, field?: Field) {
-    if (!field) {
-      throw new Error('Field parameter is required');
-    }
-  
-    const whereCondition: { [key: string]: string | undefined } = {};
-  
-    if (field === 'email') {
-      whereCondition.email = identifier ?? undefined; // Set email to identifier if it's defined, otherwise undefined
-    } else if (field === 'username') {
-      whereCondition.username = identifier ?? undefined; // Set username to identifier if it's defined, otherwise undefined
-    } else {
-      throw new Error('Invalid field');
-    }
-  
-    try {
-      const user = prisma.user.findFirst({
-        where: whereCondition as any, // Cast whereCondition to any for compatibility with Prisma's where type
-      });
-  
-      return user || null; // If user is not found, return null
-    } catch (error) {
-      console.error('Error finding user:', error);
-      return null;
-    }
+  static async changeUserRole(id: number, role: role) {
+    const user = await prisma.user.update({
+      where: {
+        id,
+      },
+      data: {
+        role,
+      },
+    });
+    return user;
+  }
+
+  static async findUserByEmail(email: string) {
+    const user = await prisma.user.findUnique({
+      where: {
+        email,
+      },
+    });
   }
 
   static async findById(id: number) {
@@ -124,11 +115,11 @@ export default class AuthService {
   static async changeStatus(id: number, status: UserStatus) {
     const user = await prisma.user.update({
       where: {
-        id
+        id,
       },
       data: {
-        status
-      }
-    })
+        status,
+      },
+    });
   }
 }
